@@ -1,8 +1,18 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
 
 public class Maze implements TextMaze {
 	
 	private char[][] maze;
 	private int width, height;
+	
+	public static void main(String[] args) {
+		Scanner myObj = new Scanner(System.in);
+		System.out.println("Enter the name of file"); 
+		String question2 = myObj.nextLine();
+		loadMaze(question2);
+	}
 	
 	
 	public Maze(int width, int height) {
@@ -14,11 +24,25 @@ public class Maze implements TextMaze {
 		}
 	}
 	
-	public static void loadMaze() {
+	public static void loadMaze(String name) {
+		File namesFile = new File(name);
+		Scanner fileInput = null; 
+		try {
+			 fileInput = new Scanner(namesFile);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			System.out.println("your file was not found!");
+			main(null); 
+		}
 		
+		while (fileInput.hasNextLine())
+		{
+		   System.out.println(fileInput.nextLine());
+		}
 	}
 	
 	public static void saveMaze() {
+		
 		
 	}
 	
