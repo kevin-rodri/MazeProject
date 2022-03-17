@@ -1,5 +1,6 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.util.Scanner;
 
 public class Maze implements TextMaze {
@@ -7,12 +8,8 @@ public class Maze implements TextMaze {
 	private char[][] maze;
 	private int width, height;
 	
-	public static void main(String[] args) {
-		Scanner myObj = new Scanner(System.in);
-		System.out.println("Enter the name of file"); 
-		String question2 = myObj.nextLine();
-		loadMaze(question2);
-	}
+	
+	
 	
 	
 	public Maze(int width, int height) {
@@ -24,26 +21,29 @@ public class Maze implements TextMaze {
 		}
 	}
 	
-	public static void loadMaze(String name) {
-		File namesFile = new File(name);
-		Scanner fileInput = null; 
+	public static Maze loadMaze(String fileName) {
 		try {
-			 fileInput = new Scanner(namesFile);
+			File namesFile = new File(fileName);
+			Scanner fileInput = new Scanner(namesFile);
+			int width = fileInput.nextInt();
+			int height = fileInput.nextInt();
+			Maze maze = new Maze(width, height);
+				fileInput.close();
+				return maze;
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
-			System.out.println("your file was not found!");
-			main(null); 
-		}
-		
-		while (fileInput.hasNextLine())
-		{
-		   System.out.println(fileInput.nextLine());
+			return null;
 		}
 	}
 	
-	public static void saveMaze() {
-		
-		
+	public static void saveMaze(String fileName, Maze maze) {
+		try(PrintWriter fileOutput = new PrintWriter(new File(fileName))){
+			fileOutput.println(maze.width() + maze.height());
+			fileOutput.println(maze.maze);
+		} catch (FileNotFoundException e ) {
+			// Just a placeholder because I don't know what have to be returned if nothing's found
+			return;
+		}  
 	}
 	
 	@Override
