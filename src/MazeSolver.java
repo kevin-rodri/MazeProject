@@ -44,6 +44,8 @@ public class MazeSolver {
 	}
 	
 	public static void solveMazeHelper(Maze maze , Point location) {
-		// if (maze.get(location) == GOAL)
+		 if (maze.get(location) == TextMaze.GOAL) {
+			 
+		 }
 	}
 }
