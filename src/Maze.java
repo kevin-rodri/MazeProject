@@ -26,8 +26,8 @@ public class Maze implements TextMaze {
 			Maze maze = new Maze(width, height);
 			for (int y = height - 1; y >= 0; y--) {
 				for (int x = 0; x < width; x++) {
-					Point point = new Point(width, height - 1);
-					maze.set(point, EMPTY);
+					Point point = new Point(width, height);
+					maze.get(point);
 				}
 				String line = fileInput.nextLine();
 			}
