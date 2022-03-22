@@ -24,7 +24,13 @@ public class Maze implements TextMaze {
 			int width = fileInput.nextInt();
 			int height = fileInput.nextInt();
 			Maze maze = new Maze(width, height);
-			maze.toString();
+			for (int y = height - 1; y >= 0; y--) {
+				for (int x = 0; x < width; x++) {
+					Point point = new Point(width, height - 1);
+					maze.set(point, EMPTY);
+				}
+				String line = fileInput.nextLine();
+			}
 			fileInput.close();
 			return maze;
 		} catch (FileNotFoundException e) {
