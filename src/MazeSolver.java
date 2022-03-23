@@ -39,13 +39,20 @@ public class MazeSolver {
 	}
 	
 	
-	public static void solveMaze(Maze maze , Point start, Point end) {
+	public static boolean solveMaze(Maze maze , Point start, Point end) {
+		maze.set(end, TextMaze.GOAL);
+		boolean startPoint = solveMazeHelper(maze, start);
+		maze.set(end, TextMaze.GOAL);
+		return startPoint;
 		
 	}
 	
-	public static void solveMazeHelper(Maze maze , Point location) {
+	public static boolean solveMazeHelper(Maze maze , Point location) {
+		return false;
+		/*
 		 if (maze.get(location) == TextMaze.GOAL) {
 			 
 		 }
+		 */
 	}
 }
