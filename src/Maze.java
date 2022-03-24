@@ -25,8 +25,8 @@ public class Maze implements TextMaze {
 			int height = fileInput.nextInt();
 			Maze maze = new Maze(width, height);
 			for (int y = height - 1; y >= 0; y--) {
-				for (int x = 0; x < width; x++) {
-					Point point = new Point(width, height);
+				for (int x = 0; x < width - 1 ; x++) {
+					Point point = new Point(x,y);
 					maze.get(point);
 				}
 				String line = fileInput.nextLine();
@@ -83,7 +83,7 @@ public class Maze implements TextMaze {
 	@Override
 	public boolean inBounds(Point p) {
 		// TODO Auto-generated method stub
-		if (p.x < 0 && p.y < 0) {
+		if (p.x < 0 || p.y < 0 || p.x > width || p.y > height) {
 			return false;
 		} else {
 			return true;

@@ -16,43 +16,76 @@ public class MazeSolver {
 			} else {
 				keepGoing = false;
 				while(point) {
-				System.out.println(maze.toString());
-				System.out.println("Please enter start coordinate for maze");
-				int startX = myObj.nextInt();
-				int startY = myObj.nextInt();
-				Point start = new Point(startX, startY);
-				System.out.println("Please enter end coordinate for maze");
-				int endX = myObj.nextInt();
-				int endY = myObj.nextInt();
-				Point end = new Point(endX, endY);
-				if (!maze.inBounds(start) || !maze.inBounds(end)) {
-					System.out.println("Invalid point, please try again.");
+					System.out.println(maze.toString());
+					System.out.println("Please enter start coordinate for maze");
+					int startX = myObj.nextInt();
+					int startY = myObj.nextInt();
+					Point start = new Point(startX, startY);
+					System.out.println("Please enter end coordinate for maze");
+					int endX = myObj.nextInt();
+					int endY = myObj.nextInt();
+					Point end = new Point(endX, endY);
+					if (!maze.inBounds(start) || !maze.inBounds(end)) {
+						System.out.println("Invalid point, please try again.");
 					} else {
 						point = false;
-						solveMaze(maze, start, end);
+						System.out.println(solveMaze(maze, start, end));
+						System.out.println(maze.toString());
 					}
 				}
-				
+
 			}
 		}
-		
+
 	}
-	
-	
+
+
 	public static boolean solveMaze(Maze maze , Point start, Point end) {
 		maze.set(end, TextMaze.GOAL);
+		maze.set(start, TextMaze.START);
 		boolean startPoint = solveMazeHelper(maze, start);
-		maze.set(end, TextMaze.GOAL);
 		return startPoint;
-		
+
 	}
-	
+
 	public static boolean solveMazeHelper(Maze maze , Point location) {
+
+		if (maze.get(location) == TextMaze.GOAL) {
+			return true; 
+		}
+		if(maze.get(location) != TextMaze.EMPTY) {
+			return false; 			
+		}
+		maze.set(location, TextMaze.PATH);
+		Point north = new Point(location.x, location.y+1);
+		if(maze.inBounds(north))
+		{
+			if (solveMazeHelper(maze, north)) {
+				return true;
+			} 
+		}
+		Point south = new Point(location.x, location.y-1);
+		if(maze.inBounds(south))
+		{
+			if (solveMazeHelper(maze, south)) {
+				return true;
+			} 
+		}
+		Point east = new Point(location.x-1, location.y);
+		if(maze.inBounds(east))
+		{
+			if (solveMazeHelper(maze, east)) {
+				return true;
+			} 
+		}
+		Point west = new Point(location.x+1, location.y);
+		if(maze.inBounds(east))
+		{
+			if (solveMazeHelper(maze, west)) {
+				return true;
+			} 
+		}
+		maze.set(location, TextMaze.VISITED); 
 		return false;
-		/*
-		 if (maze.get(location) == TextMaze.GOAL) {
-			 
-		 }
-		 */
 	}
 }
