@@ -3,7 +3,8 @@ import java.util.Scanner;
 public class MazeSolver {
 
 	public static void main(String[] args) {
-		// Main method that will run the entire program. This will ask the user for a a maze and will solve the maze (or least try to) and save it to another maze. 
+		// Main method that will run the entire program. This will ask the user for a a
+		// maze and will solve the maze (or least try to) and save it to another maze.
 		boolean keepGoing = true;
 		boolean point = true;
 		try (Scanner myObj = new Scanner(System.in)) {
@@ -36,16 +37,19 @@ public class MazeSolver {
 							Maze.saveMaze(filename, maze);
 							System.out.println();
 							System.out.println(maze.toString());
+							Maze.saveMaze(filename + ".solved", maze);
+
 						}
 					}
 
 				}
 			}
 		}
-
 	}
-	
-	// Will set the end point to the GOAL character, call the solveMazeHelper method , set the beginning of maze to the start character and will return whether the maze is solved or not.
+
+	// Will set the end point to the GOAL character, call the solveMazeHelper method
+	// , set the beginning of maze to the start character and will return whether
+	// the maze is solved or not.
 	public static boolean solveMaze(Maze maze, Point start, Point end) {
 		maze.set(end, TextMaze.GOAL);
 		boolean startPoint = solveMazeHelper(maze, start);
@@ -54,7 +58,9 @@ public class MazeSolver {
 		return startPoint;
 	}
 
-	// will attempt to solve the maze and will attempt to reach the goal character by recursively going through the maze. Will return true or false whether the maze is actually solved depending on the considitionals inside this method.
+	// will attempt to solve the maze and will attempt to reach the goal character
+	// by recursively going through the maze. Will return true or false whether the
+	// maze is actually solved depending on the conditionals inside this method.
 	public static boolean solveMazeHelper(Maze maze, Point location) {
 		if (!maze.inBounds(location)) {
 			return false;
@@ -67,16 +73,14 @@ public class MazeSolver {
 		}
 		if (maze.get(location) != TextMaze.START) {
 			maze.set(location, TextMaze.PATH);
-		} 
+		}
 		boolean solvedMaze = solveMazeHelper(maze, new Point(location.x, location.y - 1))
 				|| solveMazeHelper(maze, new Point(location.x, location.y + 1))
 				|| solveMazeHelper(maze, new Point(location.x + 1, location.y))
 				|| solveMazeHelper(maze, new Point(location.x - 1, location.y));
-
-				if (!solvedMaze){
-					maze.set(location, TextMaze.VISITED);
-				}
-				return solvedMaze;
+		if (!solvedMaze) {
+			maze.set(location, TextMaze.VISITED);
+		}
+		return solvedMaze;
 	}
-
 }

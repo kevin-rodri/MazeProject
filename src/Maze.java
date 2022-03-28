@@ -26,7 +26,7 @@ public class Maze implements TextMaze {
 			File namesFile = new File(fileName);
 			Scanner fileInput = new Scanner(namesFile);
 			int width = fileInput.nextInt();
-			int height = fileInput.nextInt();
+			int height = fileInput.nextInt();		
 			Maze maze = new Maze(width, height);
 			fileInput.nextLine();
 			while (fileInput.hasNextLine()) {
@@ -68,7 +68,6 @@ public class Maze implements TextMaze {
 	// gets the character of a point and will return that character is the point is in bounds
 	@Override
 	public char get(Point p) {
-		// TODO Auto-generated method stub
 		if (p.x < 0 || p.y < 0 || p.x >= width || p.y >= height) {
 			throw new PointOutOfBoundsException(p.toString());
 		}
@@ -90,7 +89,6 @@ public class Maze implements TextMaze {
 	// Will check if a point is in bounds and will return either true or false
 	@Override
 	public boolean inBounds(Point p) {
-		// TODO Auto-generated method stub
 		if (p.x < 0 || p.y < 0 || p.x >= width || p.y >= height) {
 			return false;
 		} else {
